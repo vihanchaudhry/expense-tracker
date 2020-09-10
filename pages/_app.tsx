@@ -4,7 +4,7 @@ import '../styles/index.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout title='Order Corn — An online food ordering app with Strapi, Next.js, Stripe, Tailwind CSS, GraphQL, and React Context.'>
+    <Layout title='Next.js + TypeScript + Tailwind CSS — My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'>
       <Component {...pageProps} />
     </Layout>
   );

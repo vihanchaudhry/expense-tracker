@@ -7,7 +7,10 @@ type Props = {
   title?: string;
 };
 
-function Layout({ children, title = 'Order Corn' }: Props) {
+function Layout({
+  children,
+  title = 'Next.js + TypeScript + Tailwind CSS',
+}: Props) {
   return (
     <div className='min-h-screen flex flex-col justify-between bg-gray-100'>
       <Head>
@@ -17,15 +20,15 @@ function Layout({ children, title = 'Order Corn' }: Props) {
         <meta charSet='utf-8' />
         <meta
           name='description'
-          content='An online food ordering app with Strapi, Next.js, Stripe, Tailwind CSS, GraphQL, and React Context.'
+          content='My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
         ></meta>
         <meta
           property='og:title'
-          content='Order Corn — An online food ordering app with Strapi, Next.js, Stripe, Tailwind CSS, GraphQL, and React Context.'
+          content='Next.js + TypeScript + Tailwind CSS — My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
         ></meta>
         <meta
           property='og:description'
-          content='An online food ordering app with Strapi, Next.js, Stripe, Tailwind CSS, GraphQL, and React Context.'
+          content='My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
         ></meta>
       </Head>
 
@@ -39,8 +42,8 @@ function Layout({ children, title = 'Order Corn' }: Props) {
             </Link>
 
             <h2 className='text-xl font-serif text-gray-700 text-center'>
-              An online food ordering app with Strapi, Next.js, Stripe, Tailwind
-              CSS, GraphQL, and React Context.
+              My personal boilerplate for bootstrapping Next.js with TypeScript
+              and Tailwind CSS.
             </h2>
           </div>
         </div>
