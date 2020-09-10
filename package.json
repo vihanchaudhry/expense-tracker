@@ -1,7 +1,23 @@
 {
   "name": "order-corn-client",
   "version": "0.1.0",
+  "author": "Vihan Chaudhry <vihanchaudhry@gmail.com>",
   "private": true,
+  "description": "My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.",
+  "keywords": [
+    "nextjs",
+    "react",
+    "tailwindcss",
+    "typescript",
+    "boilerplate"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vihanchaudhry/nextjs-typescript-tailwind-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vihanchaudhry/nextjs-typescript-tailwind-boilerplate/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
