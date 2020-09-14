@@ -1,0 +1,28 @@
+.root {
+  min-height: 100vh;
+}
+
+.appbar {
+  flex-grow: 1;
+  width: 100%;
+  top: 0;
+}
+
+.menubutton {
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.container {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.bottomnav {
+  flex-grow: 1;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}

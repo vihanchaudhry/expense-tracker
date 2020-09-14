@@ -1,18 +1,43 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import lightGreen from '@material-ui/core/colors/lightGreen';
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Container,
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@material-ui/core';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import AddIcon from '@material-ui/icons/Add';
+import PersonIcon from '@material-ui/icons/Person';
+import MenuIcon from '@material-ui/icons/Menu';
+import styles from './layout.module.css';
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: lightGreen,
+  },
+});
 
 type Props = {
-  children?: ReactNode;
+  children?: any;
   title?: string;
 };
 
-function Layout({
-  children,
-  title = 'Next.js + TypeScript + Tailwind CSS',
-}: Props) {
+function Layout({ children, title = 'Expense Tracker' }: Props) {
+  const router = useRouter();
+  const [value, setValue] = useState(0);
+
   return (
-    <div className='min-h-screen flex flex-col justify-between bg-gray-100'>
+    <div className={styles.root}>
       <Head>
         <title>{title}</title>
         <link rel='icon' href='/favicon.ico' />
@@ -20,54 +45,77 @@ function Layout({
         <meta charSet='utf-8' />
         <meta
           name='description'
-          content='My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
+          content='An expense tracker progressive web app.'
         ></meta>
-        <meta
-          property='og:title'
-          content='Next.js + TypeScript + Tailwind CSS — My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
-        ></meta>
+        <meta name='keywords' content='expense, pwa, nextjs, typescript' />
+        <meta property='og:title' content='Expense Tracker'></meta>
         <meta
           property='og:description'
-          content='My personal boilerplate for bootstrapping Next.js with TypeScript and Tailwind CSS.'
+          content='An expense tracker progressive web app.'
         ></meta>
+        <link rel='manifest' href='/manifest.json' />
+        <link
+          rel='stylesheet'
+          href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+        />
+        <meta name='theme-color' content='#8bc34a' />
+        <link rel='apple-touch-icon' href='/icons/icon-72x72.png'></link>
       </Head>
 
-      <header>
-        <div className='bg-white'>
-          <div className='h-64 max-w-5xl px-6 mx-auto flex flex-col items-center justify-center'>
-            <Link href='/'>
-              <a className='no-underline text-gray-900'>
-                <h1 className='font-mono text-5xl md:text-6xl'>Order Corn</h1>
-              </a>
-            </Link>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
 
-            <h2 className='text-xl font-serif text-gray-700 text-center'>
-              My personal boilerplate for bootstrapping Next.js with TypeScript
-              and Tailwind CSS.
-            </h2>
-          </div>
-        </div>
+        <AppBar position='fixed' className={styles.appbar}>
+          <Toolbar>
+            <IconButton
+              edge='start'
+              className={styles.menubutton}
+              color='inherit'
+              aria-label='menu'
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant='h6' className={styles.title}>
+              {title}
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-        <div className='bg-gray-800'>
-          <nav className='max-w-3xl px-6 mx-auto h-12 flex items-center'>
-            <Link href='/'>
-              <a className='font-sans font-medium no-underline hover:underline text-white hover:text-yellow-400'>
-                Home
-              </a>
-            </Link>
-          </nav>
-        </div>
-      </header>
+        <main>
+          <Container maxWidth='md' className={styles.container}>
+            {children}
+          </Container>
+        </main>
 
-      <main className='max-w-5xl px-6 mx-auto'>{children}</main>
-
-      <footer className='bg-gray-800'>
-        <div className='max-w-5xl px-6 mx-auto'>
-          <p className='my-6 text-center text-white'>
-            © Vihan Chaudhry {new Date().getFullYear()}
-          </p>
-        </div>
-      </footer>
+        <BottomNavigation
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+            router.push(newValue);
+          }}
+          showLabels
+          className={styles.bottomnav}
+        >
+          <BottomNavigationAction
+            aria-label='expenses'
+            label='Expenses'
+            icon={<AttachMoneyIcon />}
+            value='/expenses'
+          />
+          <BottomNavigationAction
+            aria-label='add'
+            label='Add'
+            icon={<AddIcon />}
+            value='/add'
+          />
+          <BottomNavigationAction
+            aria-label='profile'
+            label='Profile'
+            icon={<PersonIcon />}
+            value='/profile'
+          />
+        </BottomNavigation>
+      </ThemeProvider>
     </div>
   );
 }
