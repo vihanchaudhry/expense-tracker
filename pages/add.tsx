@@ -31,11 +31,15 @@ export default function Add() {
           name='amount'
           id='amount'
           label='Amount'
+          placeholder='200'
           className={styles.textfield}
           inputRef={register({ required: true })}
           InputProps={{
             autoComplete: 'off',
             startAdornment: <InputAdornment position='start'>₹</InputAdornment>,
+          }}
+          InputLabelProps={{
+            shrink: true,
           }}
           variant='outlined'
           autoFocus
@@ -47,15 +51,22 @@ export default function Add() {
           name='description'
           id='description'
           label='Description'
+          multiline
+          rows={2}
+          rowsMax={4}
+          placeholder='e.g. Bought lunch with my debit card.'
           className={styles.textfield}
           inputRef={register}
           inputProps={{ autoComplete: 'off' }}
+          InputLabelProps={{
+            shrink: true,
+          }}
           variant='outlined'
           fullWidth
         />
 
         <FormControlLabel
-          label='Is this a recurring expense?'
+          label='This is a recurring expense'
           control={
             <Checkbox
               name='isRecurring'
@@ -70,7 +81,7 @@ export default function Add() {
 
         <Button
           type='submit'
-          variant='outlined'
+          variant='contained'
           className={styles.submitbutton}
           fullWidth
         >
