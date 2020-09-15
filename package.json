@@ -12,10 +12,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vihanchaudhry/nextjs-typescript-tailwind-boilerplate.git"
+    "url": "git+https://github.com/vihanchaudhry/expense-tracker.git"
   },
   "bugs": {
-    "url": "https://github.com/vihanchaudhry/nextjs-typescript-tailwind-boilerplate/issues"
+    "url": "https://github.com/vihanchaudhry/expense-tracker/issues"
   },
   "scripts": {
     "dev": "next dev",
@@ -25,6 +25,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "dexie": "^3.0.2",
     "next": "^9.5.3",
     "next-pwa": "^3.1.4",
     "react": "^16.13.1",

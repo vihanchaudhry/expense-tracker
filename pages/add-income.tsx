@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import {
   TextField,
   Checkbox,
@@ -8,30 +9,34 @@ import {
   Paper,
   InputAdornment,
 } from '@material-ui/core';
+import { Transaction } from '../interfaces/Transaction';
+import db from '../utils/db';
 import styles from './add.module.css';
 
-type Inputs = {
-  description?: string;
-  amount: number;
-  isRecurring?: boolean;
-};
-
-export default function Add() {
+export default function AddIncome() {
   const [checked, setChecked] = useState(false);
+  const router = useRouter();
 
-  const { register, handleSubmit, errors } = useForm<Inputs>();
-  const onSubmit = (data: Inputs) => console.log(data);
+  const { register, handleSubmit, errors } = useForm<Transaction>();
+  const onSubmit = async (income: Transaction) => {
+    income.isIncome = true;
+
+    const added = await db.transactions.add(income);
+    if (added) {
+      router.push('/summary');
+    }
+  };
 
   return (
     <Paper className={styles.paper}>
-      <h1>Add an expense</h1>
+      <h1>Add income</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           type='number'
           name='amount'
           id='amount'
           label='Amount'
-          placeholder='200'
+          placeholder='150'
           className={styles.textfield}
           inputRef={register({ required: true })}
           InputProps={{
@@ -54,7 +59,7 @@ export default function Add() {
           multiline
           rows={2}
           rowsMax={4}
-          placeholder='e.g. Bought lunch with my debit card.'
+          placeholder='e.g. Aadya paid me for lunch.'
           className={styles.textfield}
           inputRef={register}
           inputProps={{ autoComplete: 'off' }}
@@ -66,7 +71,7 @@ export default function Add() {
         />
 
         <FormControlLabel
-          label='This is a recurring expense'
+          label='This is a recurring income'
           control={
             <Checkbox
               name='isRecurring'

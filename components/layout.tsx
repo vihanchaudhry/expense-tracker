@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import {
@@ -15,8 +14,8 @@ import {
   BottomNavigationAction,
 } from '@material-ui/core';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import AddIcon from '@material-ui/icons/Add';
-import PersonIcon from '@material-ui/icons/Person';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from './layout.module.css';
 
@@ -28,19 +27,27 @@ const darkTheme = createMuiTheme({
 });
 
 type Props = {
-  children?: any;
+  children: ReactElement;
   title?: string;
 };
 
 function Layout({ children, title = 'Expense Tracker' }: Props) {
   const router = useRouter();
-  const [value, setValue] = useState(0);
+  const [bottomNavState, setBottomNavState] = useState(router.pathname);
+
+  // On route change effect -- set bottom nav state on route change
+  useEffect(() => {
+    const handleRouteChange = (url: string) => setBottomNavState(url);
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => router.events.off('routeChangeStart', handleRouteChange);
+  });
 
   return (
     <div className={styles.root}>
       <Head>
         <title>{title}</title>
         <link rel='icon' href='/favicon.ico' />
+
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta charSet='utf-8' />
         <meta
@@ -53,12 +60,13 @@ function Layout({ children, title = 'Expense Tracker' }: Props) {
           property='og:description'
           content='An expense tracker progressive web app.'
         ></meta>
+        <meta name='theme-color' content='#8bc34a' />
+
         <link rel='manifest' href='/manifest.json' />
         <link
           rel='stylesheet'
           href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
         />
-        <meta name='theme-color' content='#8bc34a' />
         <link rel='apple-touch-icon' href='/icons/icon-72x72.png'></link>
       </Head>
 
@@ -75,6 +83,7 @@ function Layout({ children, title = 'Expense Tracker' }: Props) {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography variant='h6' className={styles.title}>
               {title}
             </Typography>
@@ -88,31 +97,30 @@ function Layout({ children, title = 'Expense Tracker' }: Props) {
         </main>
 
         <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-            router.push(newValue);
-          }}
+          value={bottomNavState}
+          onChange={(event, newValue) => router.push(newValue)}
           showLabels
           className={styles.bottomnav}
         >
           <BottomNavigationAction
-            aria-label='expenses'
-            label='Expenses'
+            aria-label='summary'
+            label='Summary'
             icon={<AttachMoneyIcon />}
-            value='/expenses'
+            value='/summary'
           />
+
           <BottomNavigationAction
-            aria-label='add'
-            label='Add'
-            icon={<AddIcon />}
-            value='/add'
+            aria-label='Add expenses'
+            label='Add expense'
+            icon={<TrendingDownIcon />}
+            value='/add-expense'
           />
+
           <BottomNavigationAction
-            aria-label='profile'
-            label='Profile'
-            icon={<PersonIcon />}
-            value='/profile'
+            aria-label='Add income'
+            label='Add income'
+            icon={<TrendingUpIcon />}
+            value='/add-income'
           />
         </BottomNavigation>
       </ThemeProvider>
