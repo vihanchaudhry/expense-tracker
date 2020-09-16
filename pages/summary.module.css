@@ -5,15 +5,6 @@
   flex-direction: column;
 }
 
-.textfield {
-  margin-top: 8px !important;
-  margin-bottom: 8px !important; 
-}
-
-.submitbutton {
-  margin-top: 16px !important;
-}
-
 .circularprogress {
   align-self: center;
 }

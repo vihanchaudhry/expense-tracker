@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect, ReactElement } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import lightGreen from '@material-ui/core/colors/lightGreen';
+import { amber, lime } from '@material-ui/core/colors';
 import {
   CssBaseline,
   AppBar,
@@ -22,7 +22,8 @@ import styles from './layout.module.css';
 const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
-    primary: lightGreen,
+    primary: amber,
+    secondary: lime,
   },
 });
 
@@ -75,16 +76,16 @@ function Layout({ children, title = 'Expense Tracker' }: Props) {
 
         <AppBar position='fixed' className={styles.appbar}>
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               edge='start'
               className={styles.menubutton}
               color='inherit'
               aria-label='menu'
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
 
-            <Typography variant='h6' className={styles.title}>
+            <Typography variant='h6' component='h1' className={styles.title}>
               {title}
             </Typography>
           </Toolbar>
