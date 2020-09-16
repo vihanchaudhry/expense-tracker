@@ -4,4 +4,4 @@ export interface Transaction {
   amount: number;
   isRecurring: boolean;
   isIncome: boolean;
-};
+}

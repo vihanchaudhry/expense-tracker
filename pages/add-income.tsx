@@ -21,6 +21,9 @@ export default function AddIncome() {
 
   const { register, handleSubmit, errors } = useForm<Transaction>();
   const onSubmit = async (income: Transaction) => {
+    // TODO: remove when dates and recurring payments are implemented
+    income.isRecurring = false;
+    
     income.isIncome = true;
     income.amount = +income.amount;
 
@@ -82,7 +85,7 @@ export default function AddIncome() {
               fullWidth
             />
 
-            <FormControlLabel
+            {/* <FormControlLabel
               label='This is a recurring income'
               control={
                 <Checkbox
@@ -94,7 +97,7 @@ export default function AddIncome() {
                   color='primary'
                 />
               }
-            />
+            /> */}
 
             <Button
               type='submit'

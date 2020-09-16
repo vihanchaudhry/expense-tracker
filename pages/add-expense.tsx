@@ -21,6 +21,9 @@ export default function AddExpense() {
 
   const { register, handleSubmit, errors } = useForm<Transaction>();
   const onSubmit = async (expense: Transaction) => {
+    // TODO: remove when dates and recurring payments are implemented
+    income.isRecurring = false;
+    
     expense.isIncome = false;
     expense.amount = +expense.amount;
 
@@ -82,7 +85,7 @@ export default function AddExpense() {
               fullWidth
             />
 
-            <FormControlLabel
+            {/* <FormControlLabel
               label='This is a recurring expense'
               control={
                 <Checkbox
@@ -94,7 +97,7 @@ export default function AddExpense() {
                   color='primary'
                 />
               }
-            />
+            /> */}
 
             <Button
               type='submit'
