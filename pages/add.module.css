@@ -1,19 +1,12 @@
-.paper {
-  margin-top: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-}
-
 .textfield {
   margin-top: 8px !important;
-  margin-bottom: 8px !important; 
+  margin-bottom: 8px !important;
 }
 
 .submitbutton {
   margin-top: 16px !important;
 }
 
-.circularprogress {
-  align-self: center;
+h2.addheader {
+  margin-top: 0;
 }

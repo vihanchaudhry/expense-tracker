@@ -1,0 +1,10 @@
+.paper {
+  margin-top: 16px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.circularprogress {
+  align-self: center;
+}

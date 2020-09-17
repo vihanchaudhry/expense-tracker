@@ -8,7 +8,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
   Container,
   BottomNavigation,
   BottomNavigationAction,
@@ -16,7 +15,6 @@ import {
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
-import MenuIcon from '@material-ui/icons/Menu';
 import styles from './layout.module.css';
 
 const darkTheme = createMuiTheme({
@@ -34,7 +32,7 @@ type Props = {
 
 function Layout({ children, title = 'Expense Tracker' }: Props) {
   const router = useRouter();
-  const [bottomNavState, setBottomNavState] = useState(router.pathname);
+  const [bottomNavState, setBottomNavState] = useState<string>(router.pathname);
 
   // On route change effect -- set bottom nav state on route change
   useEffect(() => {
@@ -107,7 +105,7 @@ function Layout({ children, title = 'Expense Tracker' }: Props) {
             aria-label='summary'
             label='Summary'
             icon={<AttachMoneyIcon />}
-            value='/summary'
+            value='/'
           />
 
           <BottomNavigationAction

@@ -15,8 +15,8 @@ import db from '../utils/db';
 import styles from './add.module.css';
 
 export default function AddExpense() {
-  const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  // const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
 
   const { register, handleSubmit, errors } = useForm<Transaction>();
@@ -32,17 +32,17 @@ export default function AddExpense() {
     const added = await db.transactions.add(expense);
     if (added) {
       setLoading(false);
-      router.push('/summary');
+      router.push('/');
     }
   };
 
   return (
-    <Paper className={styles.paper}>
-      {loading && <CircularProgress className={styles.circularprogress} />}
+    <Paper component='section' className='paper'>
+      {loading && <CircularProgress className='circularprogress' />}
 
       {!loading && (
         <>
-          <h1>Add expense</h1>
+          <h2 className={styles.addheader}>Add expense</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               type='number'
